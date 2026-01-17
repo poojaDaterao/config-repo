@@ -6,6 +6,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/orderdb
+  cloud:
+    config:
+      import-check:
+        enabled: false   # <-- disables the startup failure if config server is down
 
 server:
   port: 8082
