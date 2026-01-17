@@ -3,14 +3,12 @@ spring:
     name: order-service
   config:
     import: "configserver:http://localhost:8886"
-
-server:
-  port: 8082
-
-spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/orderdb
+
+server:
+  port: 8082
 
 resilience4j:
   circuitbreaker:
