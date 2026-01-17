@@ -1,18 +1,16 @@
 spring:
   application:
     name: order-service
-  config:
-    import: "optional:configserver:http://localhost:8886"
   data:
     mongodb:
       uri: mongodb://localhost:27017/orderdb
-  cloud:
-    config:
-      import-check:
-        enabled: false   # <-- disables the startup failure if config server is down
 
 server:
   port: 8082
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: false
 
 resilience4j:
   circuitbreaker:
