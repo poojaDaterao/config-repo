@@ -1,6 +1,7 @@
 spring:
   application:
     name: order-service
+
   data:
     mongodb:
       uri: mongodb://localhost:27017/orderdb
@@ -16,5 +17,17 @@ resilience4j:
   circuitbreaker:
     instances:
       userService:
+        # Size of the sliding window
         slidingWindowSize: 5
+        # Minimum calls before calculating failure rate
+        minimumNumberOfCalls: 2
+        # Failure rate threshold in percentage to open circuit
         failureRateThreshold: 50
+        # Duration the circuit remains OPEN before transitioning to HALF_OPEN
+        waitDurationInOpenState: 5s
+        # Exceptions that should be treated as failures
+        recordExceptions:
+          - org.springframework.web.reactive.function.client.WebClientRequestException
+          - java.net.ConnectException
+          - exception.UserServiceUnavailableException
+        
